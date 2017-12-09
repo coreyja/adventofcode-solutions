@@ -1,5 +1,6 @@
 def valid_passphrase?(pass_phrase)
     array = pass_phrase.split
+    array = array.map { |word| word.chars.sort.join }
     array.length == array.uniq.length
 end
 
@@ -11,3 +12,4 @@ valid_passphrases = passphrases.select do |passphrase|
 end
 
 print valid_passphrases.count
+
