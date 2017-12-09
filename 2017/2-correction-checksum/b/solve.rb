@@ -3,9 +3,11 @@ def find_divisible(x, array)
 end
 
 def per_array(array)
-    array.each_with_index.map do |x, i|
+    array.map do |x|
         temp = find_divisible(x,array - [x])
-        x / temp if temp
+        if temp
+            x / temp
+        end
     end.compact.first
 end
 
