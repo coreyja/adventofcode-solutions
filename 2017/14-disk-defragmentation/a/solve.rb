@@ -60,11 +60,24 @@ class KnotHash
 	def hash
 		@_hash ||= dense_hash.map { |x| "%02x" % x }.join
 	end
-end
 
+    def binary
+        @_binary ||= dense_hash.map { |x| "%08b" % x }.join
+    end
+end
 
 input = File.read('./input.txt')
 
-p KnotHash.new(input).hash
+row_inputs = (0..127).map do |i|
+    "#{input}-#{i}"
+end
 
+hashed_rows = row_inputs.map do |row|
+	KnotHash.new(row).binary
+end
 
+ans = hashed_rows.map do |row|
+	row.chars.map(&:to_i).sum
+end.sum
+
+p ans
